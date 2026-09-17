@@ -1,5 +1,5 @@
 import http from "http";
-import { getUsers } from "./user.js";  
+import { addUser , getUsers } from "./user.js";  
 
 
 const server = http.createServer((req, res) => {
@@ -7,6 +7,16 @@ const server = http.createServer((req, res) => {
         
         res.end(JSON.stringify(getUsers()));
     } else if (req.url === "/api/users" && req.method === "POST") {
+        let body ='';
+        req.on('data', (chunk) =>{
+            body += chunk;
+        })
+        req.on('end', ()=>{
+            const user = JSON.parse(body);
+            const userCreated = addUser(user);
+            res.end(JSON.stringify({ msg: "user created", user: userCreated }));
+        
+        })
         res.end(JSON.stringify([{ msg: "add user" }]));
     }
     else if (req.url === "/api/users/1" && req.method === "GET") {
