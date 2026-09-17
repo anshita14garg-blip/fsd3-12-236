@@ -1,27 +1,549 @@
-product.html
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <h1>Product Page</h1>
+    <title>iPhone 15 | TechStore</title>
 
-    <div>
-        <h2>iPhone 15</h2>
-        <img src="iphone.jpg" alt="iPhone 15" width="250">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        <p>Price: ₹70,000</p>
-        <p>Quantity: 1</p>
-        <p>Discount: 10%</p>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f5f5f7;
+        color: #1d1d1f;
+      }
 
-        <button>Add to Cart</button>
-        <button>Buy Now</button>
-    </div>
+      nav {
+        height: 70px;
+        padding: 0 8%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: rgba(255, 255, 255, 0.95);
+        border-bottom: 1px solid #ddd;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
 
-</body>
+      .logo {
+        font-size: 23px;
+        font-weight: bold;
+        letter-spacing: 1px;
+      }
+
+      nav a {
+        text-decoration: none;
+        color: #333;
+        margin-left: 30px;
+        font-size: 15px;
+      }
+
+      nav a:hover {
+        color: #0071e3;
+      }
+
+      .hero {
+        max-width: 1200px;
+        margin: auto;
+        min-height: 650px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 70px;
+        padding: 70px 40px;
+      }
+
+      .image-section {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+      }
+
+      .phone-container {
+        width: 420px;
+        height: 500px;
+        border-radius: 35px;
+        background: linear-gradient(145deg, #fff, #e8e8ed);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .phone-container::before {
+        content: "";
+        position: absolute;
+        width: 280px;
+        height: 280px;
+        background: #d8e8ff;
+        border-radius: 50%;
+        filter: blur(50px);
+      }
+
+      .phone {
+        position: relative;
+        width: 210px;
+        height: 410px;
+        border-radius: 35px;
+        background: linear-gradient(145deg, #202124, #555);
+        border: 5px solid #111;
+        box-shadow: 15px 20px 40px rgba(0, 0, 0, 0.35);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 2;
+      }
+
+      .screen {
+        width: 190px;
+        height: 390px;
+        border-radius: 28px;
+        background:
+          radial-gradient(circle at 30% 20%, #6e9cff, transparent 35%),
+          linear-gradient(135deg, #111, #252a55, #111);
+        position: relative;
+      }
+
+      .dynamic-island {
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 70px;
+        height: 20px;
+        background: #000;
+        border-radius: 20px;
+      }
+
+      .info {
+        flex: 1;
+        max-width: 520px;
+      }
+
+      .new {
+        color: #0071e3;
+        font-size: 14px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        margin-bottom: 15px;
+      }
+
+      h1 {
+        font-size: 60px;
+        letter-spacing: -2px;
+        margin-bottom: 10px;
+      }
+
+      .tagline {
+        font-size: 22px;
+        color: #6e6e73;
+        line-height: 1.5;
+        margin-bottom: 25px;
+      }
+
+      .rating {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 25px;
+      }
+
+      .stars {
+        color: #ff9f0a;
+        font-size: 18px;
+      }
+
+      .reviews {
+        color: #6e6e73;
+        font-size: 14px;
+      }
+
+      .price {
+        font-size: 34px;
+        font-weight: bold;
+      }
+
+      .old-price {
+        color: #888;
+        text-decoration: line-through;
+        margin-top: 5px;
+      }
+
+      .discount {
+        display: inline-block;
+        margin-top: 10px;
+        background: #e8f5e9;
+        color: #198754;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: bold;
+      }
+
+      .option {
+        margin-top: 25px;
+      }
+
+      .option-title {
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .options {
+        display: flex;
+        gap: 10px;
+      }
+
+      .option-btn {
+        padding: 10px 20px;
+        background: white;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+
+      .option-btn:hover {
+        border-color: #0071e3;
+      }
+
+      .option-btn.selected {
+        border: 2px solid #0071e3;
+        color: #0071e3;
+      }
+
+      .buttons {
+        display: flex;
+        gap: 12px;
+        margin-top: 30px;
+      }
+
+      button {
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      .cart {
+        padding: 14px 25px;
+        background: white;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+      }
+
+      .cart:hover {
+        background: #eee;
+      }
+
+      .buy {
+        padding: 14px 35px;
+        background: #0071e3;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 8px 20px rgba(0, 113, 227, 0.25);
+      }
+
+      .buy:hover {
+        background: #005bb5;
+        transform: translateY(-2px);
+      }
+
+      .enquiry {
+        margin-top: 25px;
+        padding: 18px;
+        background: white;
+        border-radius: 12px;
+        border: 1px solid #ddd;
+      }
+
+      .enquiry p {
+        color: #6e6e73;
+        font-size: 14px;
+        margin-bottom: 8px;
+      }
+
+      .enquiry a {
+        text-decoration: none;
+        color: #0071e3;
+        font-weight: bold;
+      }
+
+      .features {
+        background: white;
+        padding: 60px 8%;
+        display: flex;
+        justify-content: center;
+        gap: 80px;
+        text-align: center;
+        border-top: 1px solid #ddd;
+      }
+
+      .feature {
+        max-width: 180px;
+      }
+
+      .feature-icon {
+        font-size: 30px;
+        margin-bottom: 12px;
+      }
+
+      .feature h3 {
+        font-size: 16px;
+        margin-bottom: 6px;
+      }
+
+      .feature p {
+        color: #6e6e73;
+        font-size: 13px;
+        line-height: 1.5;
+      }
+
+      /* POPUP */
+
+      .message {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%) translateY(100px);
+
+        background: #1d1d1f;
+        color: white;
+
+        padding: 15px 25px;
+        border-radius: 30px;
+
+        opacity: 0;
+        transition: 0.4s;
+
+        z-index: 100;
+      }
+
+      .message.show {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+
+      @media (max-width: 850px) {
+        nav {
+          padding: 0 5%;
+        }
+
+        nav a {
+          margin-left: 10px;
+        }
+
+        .hero {
+          flex-direction: column;
+          padding: 50px 20px;
+        }
+
+        .phone-container {
+          width: 330px;
+          height: 400px;
+        }
+
+        .phone {
+          transform: scale(0.8);
+        }
+
+        h1 {
+          font-size: 45px;
+        }
+
+        .features {
+          flex-direction: column;
+          align-items: center;
+          gap: 35px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+
+    <nav>
+      <div class="logo">TECHSTORE</div>
+
+      <div>
+        <a href="/">Home</a>
+        <a href="/product">Product</a>
+        <a href="/contact">Contact</a>
+      </div>
+    </nav>
+
+    <!-- PRODUCT -->
+
+    <section class="hero">
+      <div class="image-section">
+        <div class="phone-container">
+          <div class="phone">
+            <div class="screen">
+              <div class="dynamic-island"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info">
+        <div class="new">NEW ARRIVAL</div>
+
+        <h1>iPhone 15</h1>
+
+        <p class="tagline">
+          A16 Bionic. Advanced camera system. All-day battery life. Designed to
+          impress.
+        </p>
+
+        <div class="rating">
+          <div class="stars">★★★★★</div>
+
+          <div class="reviews">4.8 · 1,240 Reviews</div>
+        </div>
+
+        <div class="price">₹70,000</div>
+
+        <div class="old-price">₹77,777</div>
+
+        <span class="discount"> Save 10% </span>
+
+        <!-- STORAGE -->
+
+        <div class="option">
+          <div class="option-title">Storage</div>
+
+          <div class="options">
+            <button class="option-btn">128 GB</button>
+
+            <button class="option-btn selected">256 GB</button>
+
+            <button class="option-btn">512 GB</button>
+          </div>
+        </div>
+
+        <!-- COLOR -->
+
+        <div class="option">
+          <div class="option-title">Color</div>
+
+          <div class="options">
+            <button class="option-btn selected">Black</button>
+
+            <button class="option-btn">Blue</button>
+
+            <button class="option-btn">Pink</button>
+          </div>
+        </div>
+
+        <!-- ACTION BUTTONS -->
+
+        <div class="buttons">
+          <button class="cart" onclick="addToCart()">🛒 Add to Cart</button>
+
+          <button class="buy" onclick="buyNow()">Buy Now →</button>
+        </div>
+
+        <!-- ENQUIRY -->
+
+        <div class="enquiry">
+          <p>Have questions about this product?</p>
+
+          <a href="/contact"> ✉️ Make a Product Enquiry → </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+
+    <section class="features">
+      <div class="feature">
+        <div class="feature-icon">🚚</div>
+        <h3>Free Delivery</h3>
+        <p>Fast and secure delivery to your doorstep.</p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">🔒</div>
+        <h3>Secure Payment</h3>
+        <p>Your payment information is always protected.</p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">↩️</div>
+        <h3>Easy Returns</h3>
+        <p>Hassle-free returns within 7 days.</p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">💬</div>
+        <h3>Product Support</h3>
+        <p>Our team is here to help you.</p>
+      </div>
+    </section>
+
+    <!-- POPUP MESSAGE -->
+
+    <div class="message" id="message"></div>
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+      // STORAGE & COLOR BUTTONS
+
+      const optionButtons = document.querySelectorAll(".option-btn");
+
+      optionButtons.forEach((button) => {
+        button.addEventListener("click", function () {
+          const parent = this.parentElement;
+
+          parent
+            .querySelectorAll(".option-btn")
+            .forEach((btn) => btn.classList.remove("selected"));
+
+          this.classList.add("selected");
+
+          showMessage(this.innerText + " selected");
+        });
+      });
+
+      // ADD TO CART
+
+      function addToCart() {
+        showMessage("🛒 iPhone 15 added to your cart!");
+      }
+
+      // BUY NOW
+
+      function buyNow() {
+        showMessage("✅ Proceeding to checkout...");
+
+        setTimeout(() => {
+          window.location.href = "/contact";
+        }, 1200);
+      }
+
+      // POPUP
+
+      function showMessage(text) {
+        const message = document.getElementById("message");
+
+        message.innerText = text;
+
+        message.classList.add("show");
+
+        setTimeout(() => {
+          message.classList.remove("show");
+        }, 2000);
+      }
+    </script>
+  </body>
 </html>

@@ -26,7 +26,7 @@ one of the most important module in Node.js ,originally designed for building sc
 6. any file to download
 7. etc
 
-## Type of information ->res.writeHead( ), res.setHead( )
+## Type of information -> res.writeHead( ) , res.setHead( )
 1. text/html -> for html file/ content.
 2. text/json , application /json-> for json data.
 3. text/css -> for css file/contents.
