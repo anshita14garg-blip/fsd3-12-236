@@ -17,4 +17,6 @@ app.get("/products", (req, res) => {
   res.sendFile(path.join(dirname, "pages", "products.html"));
 });
 
-app.listen(4444, () => console.log("prg2 is running at 4444"));
+app.use((req, res) => {
+    res.status(404).send("<h1>Page not found</h1>");
+});
